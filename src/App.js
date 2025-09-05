@@ -250,7 +250,7 @@ const handleInstall = async () => {
 
   return (
     <>
-    {/* <SessionGuard> */}
+    <SessionGuard>
       {/* <ForcePortraitOnly /> */}
         <DemoBanner />
       <div className="DesktopPlusMobile">
@@ -550,7 +550,7 @@ const handleInstall = async () => {
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
-      {/* </SessionGuard> */}
+      </SessionGuard>
     </>
   );
 }
