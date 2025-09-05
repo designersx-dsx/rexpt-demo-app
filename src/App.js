@@ -250,7 +250,7 @@ const handleInstall = async () => {
 
   return (
     <>
-    {/* <SessionGuard> */}
+    <SessionGuard>
       {/* <ForcePortraitOnly /> */}
         <DemoBanner name={demoSession?.name ||"User"}/>
       <div className="DesktopPlusMobile">
@@ -270,7 +270,7 @@ const handleInstall = async () => {
         </div>
         <div className="ForMobile">
 
-     {showPopup && (
+     {/* {showPopup && (
         <div
           style={{
             position: "fixed",
@@ -328,7 +328,7 @@ const handleInstall = async () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
    
           <PreventPullToRefresh setRefreshKey={setRefreshKey}>
             {/* <BrowserRouter> */}
@@ -550,7 +550,7 @@ const handleInstall = async () => {
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
-      {/* </SessionGuard> */}
+      </SessionGuard>
     </>
   );
 }

@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import styles from "./DemoBanner.module.css";
 import { ArrowLeft } from "lucide-react";
+import PopUp from "../Popup/Popup";
 
 const DemoBanner = ({ name }) => {
   const [loading, setLoading] = useState(false);
+  const [popupType2, setPopupType2] = useState("");
+    const [popupMessage2, setPopupMessage2] = useState();
 
 const endSession = () => {
-  if (window.confirm("Are you sure you want to end this demo session?")) {
-    setLoading(true);
-    sessionStorage.clear();
-    localStorage.clear();
+    setPopupType2("confirm");
+    setPopupMessage2("Are you sure you want to end this demo session?");
+//   if (window.confirm("Are you sure you want to end this demo session?")) {
 
-    setTimeout(() => {
-      // Try to close tab if it was script-opened
-      window.open("https://admin.rexpt.in/", "_self"); // fallback redirect
-      window.close();
-    }, 2000);
-  }
+//   }
 };
+console.log(popupType2,popupMessage2)
 
   return (
     <>
@@ -33,8 +31,29 @@ const endSession = () => {
       </div>
 
       <div className={styles.content}>
-        {/* yahan tumhara app ka main content render hoga */}
+    {popupMessage2 && (
+        <PopUp
+        type={popupType2}
+        message={popupMessage2}
+        onClose={() => {
+        setPopupMessage2("");
+        setPopupType2("");
+        }}
+        onConfirm={() => {
+         setLoading(true);
+            sessionStorage.clear();
+            localStorage.clear();
+
+            setTimeout(() => {
+            // Try to close tab if it was script-opened
+            window.location.href = "https://admin.rexpt.in/"; 
+            //   window.open("https://admin.rexpt.in/", "_self"); // fallback redirect
+            window.close();
+            }, 2000);
+        }} />   )} 
       </div>
+
+    
     </>
   );
 };
