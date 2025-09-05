@@ -119,15 +119,15 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    if (userID) {
-      try {
-        initNotificationSocket(userID, navigate);
-      } catch (err) {
-        console.error("Token decode error:", err);
-      }
-    }
-  }, [userID, navigate]);
+  // useEffect(() => {
+  //   if (userID) {
+  //     try {
+  //       initNotificationSocket(userID, navigate);
+  //     } catch (err) {
+  //       console.error("Token decode error:", err);
+  //     }
+  //   }
+  // }, [userID, navigate]);
 
   useEffect(() => {
     if (userID) {

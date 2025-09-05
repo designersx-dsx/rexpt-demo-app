@@ -158,12 +158,11 @@ function Thankyou2() {
         localStorage.setItem("paymentDone", true);
         localStorage.setItem("subcriptionIdUrl", subcriptionId);
 
-        sessionStorage.clear(); // Clear sessionStorage once the user is created
-        setTimeout(() => {
+        // sessionStorage.clear(); // Clear sessionStorage once the user is created
         sessionStorage.setItem("encryptedPayload", tempencryptedPayload);
         sessionStorage.setItem("signature", tempsignature);
         sessionStorage.setItem("demoSession", JSON.stringify(demoSession));
-        }, 500);
+       
         // Attach the user to the subscription
         const attachUserResponse = await fetch(
           `${API_BASE_URL}/pay-as-you-go-userID-attach`,
