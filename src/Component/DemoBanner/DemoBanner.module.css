@@ -1,11 +1,11 @@
 .banner {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* text ko center rakhne ke liye */
   gap: 10px;
   width: 100%;
   box-sizing: border-box;
-  padding: 8px 15px;
+  padding: 15px 20px;
   background: linear-gradient(90deg, #6524eb, #8448ff);
   color: #fff;
   font-size: 14px;
@@ -17,6 +17,62 @@
   left: 0;
 }
 
+.backButton {
+  position: absolute; /* left me fix karne ke liye */
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap; /* text wrap na ho */
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.bannerText {
+  text-align: center;
+}
+
 .content {
-  margin-top: 45px; /* banner ke niche jagah */
+  margin-top: 55px; /* banner ke niche jagah */
+}
+
+/* 🔹 Mobile Responsive (max-width 600px) */
+@media (max-width: 600px) {
+  .banner {
+    flex-direction: column; /* back button upar, text niche */
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .backButton {
+    position: relative; /* absolute hata diya */
+    top: unset;
+    left: unset;
+    transform: none;
+    align-self: flex-start; /* left aligned */
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-bottom: 6px;
+  }
+
+  .bannerText {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .content {
+    margin-top: 80px; /* banner ki height mobile me jyada ho sakti hai */
+  }
 }
