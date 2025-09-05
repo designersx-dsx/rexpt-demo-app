@@ -88,6 +88,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import NotificationView from "./Component/Notifications/NotificationView";
+import DemoBanner from "./Component/DemoBanner/DemoBanner";
+import SessionGuard from "./Component/SessionGuard";
 // import Test from "./utils/Test";
 function App() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -246,7 +248,9 @@ const handleInstall = async () => {
 
   return (
     <>
+    <SessionGuard>
       {/* <ForcePortraitOnly /> */}
+        <DemoBanner name="Ajay"/>
       <div className="DesktopPlusMobile">
         <div className="ForDesktop">
           <img src="svg/Rexpt-Logo.svg" />
@@ -544,6 +548,7 @@ const handleInstall = async () => {
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
+      </SessionGuard>
     </>
   );
 }

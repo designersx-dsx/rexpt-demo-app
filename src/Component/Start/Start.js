@@ -12,6 +12,8 @@ function Start() {
   const searchParams = new URLSearchParams(location.search);
   const referral = searchParams.get("referral") || "";
   const selectedPlan = searchParams.get("plan") || "";
+  const sessionId = searchParams.get("sessionId") || "";
+  const signature = searchParams.get("signature") || "";
   const businessType = searchParams.get("businessType") || "";
   const [step, setStep] = useState(0);
   const handleClick = () => {
@@ -24,82 +26,46 @@ function Start() {
       navigate("/signup");
     }, 700);
   };
-  console.log(referral, selectedPlan)
-  useEffect(() => {
-    const handleReferral = async () => {
-      const currentDomain = window.location.hostname;
-      const isFromReferrerLink = currentDomain === "refer.rxpt.us";
+  console.log(signature, sessionId)
+  // useEffect(() => {
+  //   const handleReferral = async () => {
+  
+  //     let updated = false;
+      
+  //       if (sessionId && signature) {
+  //           try {
+  //         const res = await axios.get(
+  //           `${process.env.REACT_APP_API_BASE_URL}/demoApp/validate-demoSession?encryptedPayload=${encodeURIComponent(sessionId)}&signature=${encodeURIComponent(signature)}` , 
+  //           {
+  //              headers: {
+  //               'Content-Type': 'application/json',              },
+  //           }
+  //         );
+  //         console.log(res.data)
+  //         if (res?.data?.valid) {
+  //         sessionStorage.setItem("signature", signature);
+  //         sessionStorage.setItem("sessionId", sessionId);
+  //         searchParams.delete("referral");
+  //         // navigate("/signup", { replace: true });
+  //         updated = true;
+  //          }else {
+  //           console.log("Invalid sessionId sessionId:", referral);
+  //          }
 
-      if (referral && isFromReferrerLink) {
-        try {
-          const res = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/endusers/check-code/${referral}` ,
-            {
-               headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
-  },            }
-          );
+  //           } catch (error) {
+  //             console.error("Failed to validate referral:", error);
+  //             sessionStorage.removeItem("referredBy");
+  //           }
+  //       }
+      
 
-          if (res?.data?.valid) {
-            sessionStorage.setItem("referredBy", referral);
-            window.location.href = `https://app.rexpt.in?referral=${referral}`;
-            navigate("/signup", { replace: true });
-          }
-          else {
-            window.location.href = `https://app.rexpt.in/`;
-            sessionStorage.removeItem("referredBy");
-          }
-        } catch (error) {
-          console.error("Failed to validate referral:", error);
-        }
-      }
+  //       if (updated) {
+  //         navigate(location.pathname, { replace: true });
+  //       }
+  //     };
 
-      let updated = false;
-      if (referral && !isFromReferrerLink) {
-        try {
-          const res = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/endusers/check-code/${referral}` , 
-            {
-               headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
-  },
-            }
-          );
-          if (res?.data?.valid) {
-          sessionStorage.setItem("referredBy", referral);
-          searchParams.delete("referral");
-          navigate("/signup", { replace: true });
-          updated = true;
-           }else {
-            console.log("Invalid referral code:", referral);
-            sessionStorage.removeItem("referredBy");
-           }
-
-        } catch (error) {
-          console.error("Failed to validate referral:", error);
-          sessionStorage.removeItem("referredBy");
-        }
-        }
-        if (selectedPlan) {
-          sessionStorage.setItem("selectedPlan", selectedPlan);
-          searchParams.delete("plan");
-          updated = true;
-        }
-        if (businessType) {
-          sessionStorage.setItem("businessType", businessType);
-          searchParams.delete("businessType");
-          updated = true;
-        }
-
-        if (updated) {
-          navigate(location.pathname, { replace: true });
-        }
-      };
-
-      handleReferral();
-    }, [referral, selectedPlan, businessType, location.pathname, location.search, navigate]);
+  //     handleReferral();
+  //   }, [referral, selectedPlan, businessType, location.pathname, location.search, navigate]);
 
   useEffect(() => {
     const setVH = () => {

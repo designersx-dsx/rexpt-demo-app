@@ -12,6 +12,7 @@ import {
   updateEmailSendOtp,
   updateUserDetails,
   verifyEmailOTP,
+  demoverifyEmailOTP,
 } from "../../Store/apiStore";
 import UploadProfile from "../Popup/profilePictureUpdater/UploadProfile";
 import decodeToken from "../../lib/decodeToken";
@@ -284,7 +285,7 @@ const EditProfile = () => {
       const code = otp.join("");
 
       // API to verify
-      const verified = await verifyEmailOTP(otpEmail, code); // <-- create this API
+      const verified = await demoverifyEmailOTP(otpEmail, code); // <-- create this API
 
       if (verified) {
         setEmailVerified(true);

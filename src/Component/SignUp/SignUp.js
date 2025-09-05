@@ -3,6 +3,8 @@ import styles from "../SignUp/SignUp.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   API_BASE_URL,
+  demoLoginWithEmailOTP,
+  demoverifyEmailOTP,
   LoginWithEmailOTP,
   verifyEmailOTP,
 } from "../../Store/apiStore";
@@ -35,7 +37,8 @@ const SignUp = () => {
   const tempReferredByName = sessionStorage.getItem("referredByName") || "";
   const [customerId, setCustomerId] = useState();
   const [renderHtml, setRenderHtml] = useState(false);
-
+  const demo_session_id = sessionStorage.getItem("session_id") || "7563463456465678765438";
+  const demo_user_id=sessionStorage.getItem("user_id") || "7563463456465678765438";
   useEffect(() => {
     if (!resendEndTime) return;
 
@@ -100,9 +103,9 @@ const SignUp = () => {
     setIsVerifyingOtp(true);
 
     try {
-      const response = await verifyEmailOTP(email, fullOtp, customerId);
-
-      if (response?.status === 200) {
+      const response = await demoverifyEmailOTP(email);
+      console.log(response,"responseresponseresponseresponse")
+      if (response) {
         localStorage.setItem("token", response?.data.token);
         sessionStorage.clear();
         sessionStorage.setItem("referredBy", tempReferral);
@@ -115,7 +118,7 @@ const SignUp = () => {
           "showreferralfloating",
           response?.data?.user?.showreferralfloating
         );
-       
+
         setPopupType("success");
         setShowPopup(true);
         setPopupMessage("One Time Password Verified successfully!");
@@ -139,7 +142,7 @@ const SignUp = () => {
           navigate("/details", { replace: true });
         }
         if (response?.data?.paymentDone) {
-          
+
           navigate(response?.data?.user?.verifyDetails ? "/steps" : "/details", { replace: true });
         }
         else {
@@ -179,13 +182,14 @@ const SignUp = () => {
     setEmailError("");
     setIsVerifyingOtp(true);
     try {
-      const response = await LoginWithEmailOTP(email);
+    
+      const response = await demoLoginWithEmailOTP(email,demo_session_id,demo_user_id);
+  
       if (response?.status === 200) {
         setVerifiedUser(response.data.verifiedStatus);
         setShowPopup(true);
         setPopupType("success");
         setPopupMessage("One Time Password sent successfully!");
-
         setOtpSent(true);
         setOtp(["", "", "", "", "", ""]);
         inputRefs.current[0]?.blur();
