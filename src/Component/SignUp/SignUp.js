@@ -35,10 +35,14 @@ const SignUp = () => {
   const tempReferral = sessionStorage.getItem("referredBy") || "";
   const tempLandingSelectedPlan = sessionStorage.getItem("selectedPlan") || "";
   const tempReferredByName = sessionStorage.getItem("referredByName") || "";
+  const tempdemoSession = sessionStorage.getItem("demoSession") || "";
+  const demoSession = tempdemoSession ? JSON.parse(tempdemoSession) : null;
+  const tempsignature= sessionStorage.getItem("signature") || "";
+  const tempencryptedPayload = sessionStorage.getItem("encryptedPayload") || "";
   const [customerId, setCustomerId] = useState();
   const [renderHtml, setRenderHtml] = useState(false);
-  const demo_session_id = sessionStorage.getItem("session_id") || "7563463456465678765438";
-  const demo_user_id=sessionStorage.getItem("user_id") || "7563463456465678765438";
+  const demo_session_id = demoSession.sessionId || "7563463456465678765438";
+  const demo_user_id=demoSession.userId || "7563463456465678765438";
   useEffect(() => {
     if (!resendEndTime) return;
 
@@ -111,6 +115,9 @@ const SignUp = () => {
         sessionStorage.setItem("referredBy", tempReferral);
         sessionStorage.setItem("selectedPlan", tempLandingSelectedPlan);
         sessionStorage.setItem("referredByName", tempReferredByName);
+        sessionStorage.setItem("encryptedPayload", tempencryptedPayload);
+        sessionStorage.setItem("signature", tempsignature);
+        sessionStorage.setItem("demoSession", JSON.stringify(demoSession));
         if (response?.data?.paymentDone) {
           localStorage.setItem("paymentDone", true);
         }
