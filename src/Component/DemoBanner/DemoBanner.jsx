@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DemoBanner.module.css";
 import { ArrowLeft } from "lucide-react";
 import PopUp from "../Popup/Popup";
 
-const DemoBanner = ({ name }) => {
+const DemoBanner = () => {
   const [loading, setLoading] = useState(false);
   const [popupType2, setPopupType2] = useState("");
     const [popupMessage2, setPopupMessage2] = useState();
+    const [name,setName]=useState("")
 
 const endSession = () => {
     setPopupType2("confirm");
@@ -16,6 +17,13 @@ const endSession = () => {
 //   }
 };
 console.log(popupType2,popupMessage2)
+
+  const tempdemoSession = sessionStorage.getItem("demoSession") || "";
+  const demoSession = tempdemoSession ? JSON.parse(tempdemoSession) : null;
+
+  useEffect(()=>{
+    setName(demoSession?.name ||"User")
+  },[demoSession])
 
   return (
     <>
