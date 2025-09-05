@@ -252,7 +252,7 @@ const handleInstall = async () => {
     <>
     <SessionGuard>
       {/* <ForcePortraitOnly /> */}
-        <DemoBanner name={demoSession?.name ||"User"}/>
+        <DemoBanner />
       <div className="DesktopPlusMobile">
         <div className="ForDesktop">
           <img src="svg/Rexpt-Logo.svg" />
