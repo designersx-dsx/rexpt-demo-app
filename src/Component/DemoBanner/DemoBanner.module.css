@@ -1,0 +1,22 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 15px;
+  background: linear-gradient(90deg, #6524eb, #8448ff);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  z-index: 30;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.content {
+  margin-top: 45px; /* banner ke niche jagah */
+}
