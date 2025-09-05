@@ -19,6 +19,10 @@ function Thankyou2() {
   const [subcriptionId, setsubcriptionId] = useState();
   const [setSubscriptionDetails, setsetSubscriptionDetails] = useState();
   const [data, setData] = useState()
+  const tempdemoSession = sessionStorage.getItem("demoSession") || "";
+  const demoSession = tempdemoSession ? JSON.parse(tempdemoSession) : null;
+  const tempsignature= sessionStorage.getItem("signature") || "";
+  const tempencryptedPayload = sessionStorage.getItem("encryptedPayload") || "";
   const [isSubscriptionDetailsLoading, setIsSubscriptionDetailsLoading] =
     useState(true); // Subscription details loading state
 
@@ -155,7 +159,11 @@ function Thankyou2() {
         localStorage.setItem("subcriptionIdUrl", subcriptionId);
 
         sessionStorage.clear(); // Clear sessionStorage once the user is created
-
+        setTimeout(() => {
+        sessionStorage.setItem("encryptedPayload", tempencryptedPayload);
+        sessionStorage.setItem("signature", tempsignature);
+        sessionStorage.setItem("demoSession", JSON.stringify(demoSession));
+        }, 500);
         // Attach the user to the subscription
         const attachUserResponse = await fetch(
           `${API_BASE_URL}/pay-as-you-go-userID-attach`,

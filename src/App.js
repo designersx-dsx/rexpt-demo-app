@@ -191,51 +191,7 @@ const handleInstall = async () => {
     // console.log("Unread Count:", count);
   }, [notifications]);
 
-  useEffect(() => {
-    if (!userID) return;
 
-
-    // 🔌 Socket connect
-    const socket = io(SOCKET_URL, {
-      transports: ["websocket"],
-    });
-
-    socket.on("connect", () => {
-      console.log("🟢 Connected:", socket.id);
-      socket.emit("register", userID); // register user
-    });
-
-    // 📩 Listen for notification
-    socket.on("notification", (msg) => {
-      // console.log("📩 New Notification:", msg);
-      //  window.alert(`${msg.title || "Notification"}: ${msg.message}`);
-      // alert(`${msg.title || "Notification"}: ${msg.message}`)
-      //   toast.info(`${msg.title || "Notification"}: ${msg.message}`, {
-      //   position: "top-right",
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
-      // toast.info(`${msg.title || "Notification"}: ${msg.message}`, {
-      //   position: "top-right",
-      //   autoClose: 3000,
-      // });
-      // setRefreshNoitification((prev)=>!prev)
-      // console.log('new notification')
-    });
-
-    socket.on("disconnect", () => {
-      console.log("🔴 Disconnected");
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, [userID]);
   useEffect(() => {
     const ref = document.referrer;
     console.log('Referrer URL:', ref);   
