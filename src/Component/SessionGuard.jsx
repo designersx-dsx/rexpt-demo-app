@@ -9,20 +9,17 @@ const SessionGuard = ({ children }) => {
 
   useEffect(() => {
     const validateSession = async () => {
-      console.log("SessionGuard: Initializing validation...");
 
       // 1️⃣ Try sessionStorage first
       let encryptedPayload = sessionStorage.getItem("encryptedPayload");
       let signature = sessionStorage.getItem("signature");
 
-      console.log("SessionGuard: sessionStorage", { encryptedPayload, signature });
 
       // 2️⃣ Check URL params
       const searchParams = new URLSearchParams(location.search);
       const urlPayload = searchParams.get("sessionId");
       const urlSignature = searchParams.get("signature");
 
-      console.log("SessionGuard: URL params", { urlPayload, urlSignature });
 
       if (urlPayload && urlSignature) {
         encryptedPayload = urlPayload;
@@ -32,7 +29,6 @@ const SessionGuard = ({ children }) => {
         sessionStorage.setItem("encryptedPayload", encryptedPayload);
         sessionStorage.setItem("signature", signature);
 
-        console.log("SessionGuard: Saved URL params to sessionStorage");
 
         // Remove params from URL
         searchParams.delete("sessionId");
@@ -42,7 +38,6 @@ const SessionGuard = ({ children }) => {
           (searchParams.toString() ? `?${searchParams.toString()}` : "");
         navigate(newUrl, { replace: true });
 
-        console.log("SessionGuard: URL cleaned up");
       }
 
       if (!encryptedPayload || !signature) {
@@ -52,7 +47,6 @@ const SessionGuard = ({ children }) => {
       }
 
       try {
-        console.log("SessionGuard: Validating session with backend...");
         const res = await axios.get(
           `${process.env.REACT_APP_API_BASE_URL}/demoApp/validate-demoSession`,
           {
@@ -64,6 +58,8 @@ const SessionGuard = ({ children }) => {
         
         if (res?.data?.valid) {
           setStatus("valid");
+          const sessionData = res.data;
+          sessionStorage.setItem("demoSession", JSON.stringify(sessionData));
           console.log("SessionGuard: Session valid ✅");
         } else {
           setStatus("invalid");

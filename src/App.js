@@ -241,6 +241,8 @@ const handleInstall = async () => {
     console.log('Referrer URL:', ref);   
   }, []);
 
+  const tempdemoSession = sessionStorage.getItem("demoSession") || "";
+  const demoSession = tempdemoSession ? JSON.parse(tempdemoSession) : null;
 
   //  const handleClose = () => {
   //   setShowPopup(false);
@@ -250,7 +252,7 @@ const handleInstall = async () => {
     <>
     <SessionGuard>
       {/* <ForcePortraitOnly /> */}
-        <DemoBanner name="Ajay"/>
+        <DemoBanner name={demoSession?.name ||"User"}/>
       <div className="DesktopPlusMobile">
         <div className="ForDesktop">
           <img src="svg/Rexpt-Logo.svg" />
