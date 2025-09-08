@@ -53,9 +53,12 @@ console.log(popupType2,popupMessage2)
             localStorage.clear();
 
             setTimeout(() => {
-            // Try to close tab if it was script-opened
-            window.location.href = "https://admin.rexpt.in/"; 
-            //   window.open("https://admin.rexpt.in/", "_self"); // fallback redirect
+              if(demoSession?.isUserType==1){
+                window.location.href = "https://admin.rexpt.in/"; 
+              }else if(demoSession?.isUserType==2 ||demoSession?.isUserType==3){
+                 window.location.href = "https://partner.rxpt.us/"; 
+              }
+    
             window.close();
             }, 2000);
         }} />   )} 
