@@ -69,6 +69,8 @@ const SessionGuard = ({ children }) => {
         console.error("SessionGuard: Session validation failed", err);
         sessionStorage.removeItem("encryptedPayload");
         sessionStorage.removeItem("signature");
+        sessionStorage.clear();
+        localStorage.clear();
         setStatus("invalid");
       }
     };

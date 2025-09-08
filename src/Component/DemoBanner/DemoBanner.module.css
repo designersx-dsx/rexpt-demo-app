@@ -72,7 +72,12 @@
     font-size: 12px;
   }
 
-  .content {
-    margin-top: 80px; /* banner ki height mobile me jyada ho sakti hai */
+.main-content {
+  padding-top: 60px; /* Adjust based on banner height */
+}
+@media (max-width: 600px) {
+  .main-content {
+    padding-top: 85px; /* Adjust for mobile banner height */
   }
+}
 }
