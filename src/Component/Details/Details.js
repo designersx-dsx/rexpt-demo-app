@@ -120,8 +120,8 @@ const Details = () => {
           localStorage.setItem("onboardComplete", "true");
           navigate("/steps");
         }, 400);
-        const email = localStorage.getItem("userEmail");
-        sendEmailToOwner(email, name, phone);
+        // const email = localStorage.getItem("userEmail");
+        // sendEmailToOwner(email, name, phone);
       } else {
         setPopupType("failed");
         setPopupMessage("Update failed. Please try again.");
