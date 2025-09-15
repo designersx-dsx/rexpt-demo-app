@@ -51,7 +51,7 @@
 /* 🔹 Mobile Responsive (max-width 600px) */
 @media (max-width: 600px) {
   .banner {
-    flex-direction: column; /* back button upar, text niche */
+    /* flex-direction: column;  */
     padding: 10px;
     font-size: 12px;
   }
